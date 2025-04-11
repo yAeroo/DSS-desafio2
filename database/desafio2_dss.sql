@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-04-2025 a las 05:27:01
+-- Tiempo de generación: 11-04-2025 a las 07:22:50
 -- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.13
 
@@ -32,7 +32,16 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(1, 'Computadoras'),
+(2, 'Smartphones'),
+(3, 'Accesorios');
 
 -- --------------------------------------------------------
 
@@ -50,7 +59,22 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `categoria_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `imagen_url`, `categoria_id`) VALUES
+(1, 'Laptop Lenovo IdeaPad Slim 5 (2025)', 699.99, 15, 'img/laptopLenovo.jpg', 1),
+(2, 'PC Gamer Alienware Aurora R16', 999.99, 8, 'img/pcAlienware.png', 1),
+(3, 'HP ProDesk 400 G9 SFF', 499.99, 10, 'img/hpDesk.png', 1),
+(4, 'iPhone 15 Pro Max', 999.99, 12, 'img/iphone.png', 2),
+(5, 'Samsung Galaxy S24 Ultra', 899.99, 20, 'img/s24ultra.jpg', 2),
+(6, 'Xiaomi 14 Pro', 699.99, 18, 'img/xiaomi14.jpeg', 2),
+(7, 'Mouse Logitech MX Master 3S', 99.99, 25, 'img/mouseLogitech.jpg', 3),
+(8, 'Teclado Mecánico Razer BlackWidow V4', 129.99, 10, 'img/tecladoRazer.jpg', 3),
+(9, 'Audífonos Sony WH-1000XM5', 349.99, 14, 'img/audifonosSony.jpeg', 3);
 
 --
 -- Restricciones para tablas volcadas
