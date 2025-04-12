@@ -149,6 +149,13 @@ $total_items = array_sum(array_column($_SESSION['carrito'], 'cantidad'));
         </div>
     </nav>
 
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-3" role="alert">
+            <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+        </div>
+    <?php endif; ?>
+
+
     <!-- LANDING PAGE -->
     <div class="max-w-7xl mx-auto mt-10 p-4">
         <?php foreach ($productos as $categoria => $lista): ?>
