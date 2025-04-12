@@ -17,10 +17,10 @@ function obtenerProductosAgrupados($pdo) {
             'nombre' => $row['producto'],
             'precio' => $row['precio'],
             'stock' => $row['stock'],
-            'imagen' => $row['imagen_url'] ?? '',
+            'imagen' => $row['imagen_url'] ,
         ];
+        
     }
-
     return $productos;
 }
 ?>
