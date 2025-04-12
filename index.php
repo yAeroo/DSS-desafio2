@@ -1,6 +1,6 @@
 <?php
 session_start();
-//session_destroy(); // ← solo descomentalo si querés resetear todo
+//session_destroy(); // Para eliminar sesion (pruebas)
 require_once './controller/productos.php';
 
 // Inicializar carrito si no existe
@@ -8,7 +8,7 @@ if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = [];
 }
 
-// 🛒 Agregar al carrito
+// AGREGAR al carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['producto_id'])) {
     $producto_id = $_POST['producto_id'];
     $nombre = $_POST['nombre'];
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['producto_id'])) {
     $stock = intval($_POST['stock']);
     $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
 
-    // Si no existe o no es un array válido, lo inicializamos
+    // Si no existe o no es un array válido, INICIALIZARLO
     if (!isset($_SESSION['carrito'][$producto_id]) || !is_array($_SESSION['carrito'][$producto_id])) {
         $_SESSION['carrito'][$producto_id] = [
             'nombre' => $nombre,
@@ -26,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['producto_id'])) {
             'cantidad' => 1
         ];
     } else {
-        // Verificamos que la clave 'cantidad' exista y sea numérica
+        // Verificando que la clave 'cantidad' exista y sea numérica
         if (!isset($_SESSION['carrito'][$producto_id]['cantidad']) || !is_numeric($_SESSION['carrito'][$producto_id]['cantidad'])) {
             $_SESSION['carrito'][$producto_id]['cantidad'] = 1;
         }
 
-        // Aumentamos la cantidad hasta el máximo permitido por stock
+        // Aumentar la cantidad hasta el máximo permitido por stock
         if ($_SESSION['carrito'][$producto_id]['cantidad'] < $stock) {
             $_SESSION['carrito'][$producto_id]['cantidad']++;
         }
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['producto_id'])) {
     header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
-// 🗑️ Eliminar del carrito
+// ELIMINAR PRODUCTO del carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
     $producto_id = $_POST['eliminar_id'];
 
@@ -55,7 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
     header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
+// Conexión a la base de datos
 $productos = obtenerProductosAgrupados($pdo);
+
+// Obtener el total de productos en el carrito
 $total_items = array_sum(array_column($_SESSION['carrito'], 'cantidad'));
 ?>
 
